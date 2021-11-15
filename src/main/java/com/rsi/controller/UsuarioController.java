@@ -26,7 +26,7 @@ public class UsuarioController {
 		log.info("Login a User");
 		iusuarioService.login(login);
 		log.info("Loged User");		
-		return new StantarResponseDto("login info!", login);
+		return new StantarResponseDto("login info user!", login);
 	}
 
 }
