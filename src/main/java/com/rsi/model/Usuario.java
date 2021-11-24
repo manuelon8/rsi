@@ -9,8 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.rsi.dto.UsuarioDto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name="PPC_USUARIO_PRV")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -22,41 +31,26 @@ public class Usuario implements Serializable{
 	
 	@Column(name = "COD_NRBE_EN")	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String codEntidad;
-	@Column(name = "COD_ECV_PPC")	
-	private int codecvppc;
+	private String codEntidad; 
 	
-	@Column(name = "IND_USUARIO_PPAL")	
-	private String usuarioPrincipal;
+	@Column(name = "IND_USER_NAME")	
+	private String username;
 	
-	@Column(name = "ID_PROVEEDOR", length = 15, nullable = false)	
+	@Column(name = "ID_PROVEEDOR", length = 4)	
 	private String  idProveedor;
 	
-	@Column(name = "EMAIL", length = 50, nullable = false)	
+	@Column(name = "EMAIL", length = 25)	
 	private String  email;
 	
-	@Column(name = "PASSWORD", nullable = false)
-    private String passwor;
-	
-	@Column(name = "IND_RESETEAR_PASSWORD",length = 1, nullable = false)
-    private String resetearPassword;
+	@Column(name = "PASSWORD")
+    private String password;	
+ 
 	
 	@Column(name = "INTENTOS_FALLIDOS")	
 	private int intentosFallidos;
-	
-	@Column(name = "IND_EMAIL_VALIDADO",length = 1)	
-	private int emailValidado;	
-	
-	@Column(name = "COD_IDIOMA", length = 2, nullable = false)
+ 
+	@Column(name = "COD_IDIOMA", length = 2)
     private String codIdioma;
-	
-	@Column(name = "TELEFONO", length = 9, nullable = false)
-    private String telefono;
-	
-	@Column(name = "ALIAS", length = 50, nullable = false)
-    private String alias;
-	
-    @Column(name = "FECHA_HORA_PWD", nullable = false)
-    private String registDate;
+ 
 	
 }

@@ -18,6 +18,10 @@ public class LoginDto extends BusinessObjectDto implements Serializable {
 	 
 		private String codEntidad; 
 		
+		private String username;
+		
+		private String password;
+		
 		private Date loginDate; 
 		
 		private String ipLogin; 
