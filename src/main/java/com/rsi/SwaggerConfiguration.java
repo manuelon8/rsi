@@ -17,7 +17,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.rsi.controller"))
-             .paths(regex("/.*"))
+             .paths(regex("/.*"))//o PathSelectors.any() para q documente todo
              .build();
     }
 

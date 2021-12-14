@@ -1,21 +1,25 @@
 package com.rsi.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.rsi.Dao.UsuarioDao;
 import com.rsi.controller.UsuarioController;
+import com.rsi.dao.UsuarioDao;
 import com.rsi.dto.LoginDto;
 import com.rsi.dto.UsuarioDto;
 import com.rsi.exception.ResourceNotFoundException;
 import com.rsi.iservice.IUsuarioService;
-import com.rsi.model.Usuario;
+import com.rsi.model.User_Suplier;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,7 +56,7 @@ public class UsuarioService implements IUsuarioService {
 				log.warn("La informacion del usuario no es completa");
 			}else {
 				ModelMapper modelMapper = new ModelMapper();
-				Usuario entity = modelMapper.map(user, Usuario.class);
+				User_Suplier entity = modelMapper.map(user, User_Suplier.class);
 				service.save(entity);
 				log.info("Se almaceno un nuevo Usuario");
 				respuesta="Usuario guardado con exito";
@@ -68,10 +72,10 @@ public class UsuarioService implements IUsuarioService {
 		String respuesta="";
 		try {
 			if(user!=null) {
-				Usuario entity = service.getById(user.getId());
+				User_Suplier entity = service.getById(user.getId());
 				entity.setEmail(user.getEmail());
 				entity.setPassword(user.getPassword());
-				entity.setUsername(user.getUsername());
+				entity.setName(user.getUsername());
 				service.save(entity);
 				log.info("Se actualizo el  Usuario");
 				respuesta="Usuario guardado con exito";
@@ -104,6 +108,24 @@ public class UsuarioService implements IUsuarioService {
 			throw new ResourceNotFoundException("User not found userId= " + iduser);
 		}
 		return respuesta;
+	}
+		
+	@Override
+	public List<User_Suplier> getAllUser(String nombre) {
+		List<User_Suplier> listado = new ArrayList<>();
+		
+		try {
+			if(nombre==null) {
+				 service.findAll().forEach(listado::add);				 
+			}
+			else {
+				service.findByName(nombre).forEach(listado::add);				 
+			}
+		} catch (Exception e) {
+			log.warn("La informacion del usuario no es completa");			
+			throw new ResourceNotFoundException("Users not found"); 
+		}
+		return listado;
 	}
  
 

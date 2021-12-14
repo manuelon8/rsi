@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario implements Serializable{
+public class User_Suplier implements Serializable{
 
     private static final long serialVersionUID = 1L;
 	
@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
 	private String codEntidad; 
 	
 	@Column(name = "IND_USER_NAME")	
-	private String username;
+	private String name;
 	
 	@Column(name = "ID_PROVEEDOR", length = 4)	
 	private String  idProveedor;
